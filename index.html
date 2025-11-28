@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absorção de Nutrientes em Soja - Análise por Estádio Fenológico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8eaed 0%, #c5c9ce 50%, #d1d5da 100%);
+            padding: 2rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            color: #1d1d1f;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease-out;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 0.5px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.5rem;
+        }
+
+        .header {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr 120px;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .logo-container, .qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px;
+        }
+
+        .logo-container img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .qr-container img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: white;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .title-section {
+            text-align: center;
+        }
+
+        .author-name {
+            font-size: 1.25rem;
+            color: #1428A0;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #1d1d1f;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-style: normal;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            color: #86868b;
+            font-size: 0.9rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #1d1d1f;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-style: normal;
+            letter-spacing: -0.02em;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .filter-group:nth-child(2) { animation-delay: 0.1s; }
+        .filter-group:nth-child(3) { animation-delay: 0.2s; }
+        .filter-group:nth-child(4) { animation-delay: 0.3s; }
+        .filter-group:nth-child(5) { animation-delay: 0.4s; }
+
+        label {
+            display: block;
+            color: #1428A0;
+            margin-bottom: 0.5rem;
+            font-size: 0.8125rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #ffffff;
+            border: 1px solid rgba(20, 40, 160, 0.2);
+            border-radius: 12px;
+            color: #1d1d1f;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        select:hover, input:hover {
+            transform: translateY(0);
+            border-color: #1428A0;
+            box-shadow: 0 2px 8px rgba(20, 40, 160, 0.12);
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #1428A0;
+            box-shadow: 0 0 0 4px rgba(20, 40, 160, 0.1);
+        }
+
+        option {
+            background: #ffffff;
+            color: #1d1d1f;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.2s ease;
+            background: #ffffff;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            letter-spacing: -0.03em;
+        }
+
+        .stat-label {
+            font-size: 0.8125rem;
+            color: #86868b;
+            margin-top: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-weight: 400;
+        }
+
+        .legend {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-text {
+            color: #1d1d1f;
+            font-size: 0.8125rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-weight: 400;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+
+        .info-icon {
+            font-size: 1.25rem;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .info-text {
+            font-size: 0.8125rem;
+            color: #6e6e73;
+            line-height: 1.5;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-weight: 400;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-size: 0.875rem;
+        }
+
+        thead tr {
+            border-bottom: 1px solid rgba(209, 213, 219, 0.5);
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            color: #1428A0;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            letter-spacing: -0.01em;
+        }
+
+        th.right {
+            text-align: right;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(209, 213, 219, 0.3);
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(20, 40, 160, 0.04);
+        }
+
+        td {
+            padding: 1rem;
+            color: #1d1d1f;
+            font-weight: 400;
+        }
+
+        td.right {
+            text-align: right;
+        }
+
+        .indices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .index-card {
+            padding: 0.75rem;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .index-label {
+            color: #1428A0;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-weight: 600;
+        }
+
+        .index-value {
+            color: #1d1d1f;
+            font-size: 0.9rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #86868b;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 400;
+        }
+
+        footer code {
+            background: rgba(20, 40, 160, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #1428A0;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .logo-container, .qr-container {
+                display: none !important;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .author-name {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="card header">
+            <div class="header-grid">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Logo">
+                </div>
+                
+                <div class="title-section">
+                    <div class="author-name">RAUDINEI AFONSO</div>
+                    <h1>Absorção de Nutrientes em Soja</h1>
+                    <p class="subtitle">Análise por Estádio Fenológico • Extração vs Exportação</p>
+                </div>
+                
+                <div class="qr-container">
+                    <img src="qrcode.png" alt="QR Code">
+                </div>
+            </div>
+        </header>
+
+        <!-- Filtros -->
+        <div class="card">
+            <h2>Filtros de Análise</h2>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="sourceType">1. Tipo de Fonte</label>
+                    <select id="sourceType" onchange="handleSourceTypeChange()">
+                        <option value="Autores">Autores</option>
+                        <option value="Tecnologia">Tecnologia</option>
+                        <option value="Cultivar">Cultivar</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="selectedSource" id="sourceLabel">2. Autor</label>
+                    <select id="selectedSource" onchange="updateChart()"></select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="selectedNutrient">3. Nutriente</label>
+                    <select id="selectedNutrient" onchange="updateChart()">
+                        <optgroup label="Macronutrientes">
+                            <option value="N">Nitrogênio (N)</option>
+                            <option value="P">Fósforo (P)</option>
+                            <option value="K">Potássio (K)</option>
+                            <option value="Ca">Cálcio (Ca)</option>
+                            <option value="Mg">Magnésio (Mg)</option>
+                            <option value="S">Enxofre (S)</option>
+                        </optgroup>
+                        <optgroup label="Micronutrientes">
+                            <option value="B">Boro (B)</option>
+                            <option value="Cu">Cobre (Cu)</option>
+                            <option value="Fe">Ferro (Fe)</option>
+                            <option value="Mn">Manganês (Mn)</option>
+                            <option value="Zn">Zinco (Zn)</option>
+                            <option value="Mo">Molibdênio (Mo)</option>
+                            <option value="Co">Cobalto (Co)</option>
+                            <option value="Ni">Níquel (Ni)</option>
+                            <option value="Se">Selênio (Se)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="dataType">4. Tipo de Dado</label>
+                    <select id="dataType" onchange="updateChart()">
+                        <option value="Extração">Extração (Planta toda)</option>
+                        <option value="Exportação">Exportação (Grãos)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="expectedYield">5. Produtividade (ton)</label>
+                    <input type="number" id="expectedYield" value="4.2" step="0.1" min="0.1" onchange="updateChart()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <!-- Legenda -->
+        <div class="card legend">
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #1428A0;"></div>
+                <span class="legend-text">Dados Originais (Literatura)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #0070C9;"></div>
+                <span class="legend-text">Dados Calculados (Índices de Exportação)</span>
+            </div>
+        </div>
+
+        <!-- Gráfico -->
+        <div class="card">
+            <h2 id="chartTitle">Curva de Absorção</h2>
+            <div class="chart-container">
+                <canvas id="mainChart"></canvas>
+            </div>
+            <div id="infoBoxes"></div>
+        </div>
+
+        <!-- Tabela -->
+        <div class="card" id="tableCard" style="overflow-x: auto;"></div>
+
+        <!-- Informações sobre Índices -->
+        <div class="card">
+            <h2>Sobre os Dados Calculados</h2>
+            <p style="color: #6e6e73; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;">
+                Alguns valores nesta base de dados foram calculados utilizando <strong style="color: #1428A0;">índices de exportação</strong> 
+                quando dados originais não estavam disponíveis na literatura. Os índices aplicados são baseados em pesquisas da Embrapa e literatura científica:
+            </p>
+            <div class="indices-grid">
+                <div class="index-card"><div class="index-label">Nitrogênio (N)</div><div class="index-value">50-70%</div></div>
+                <div class="index-card"><div class="index-label">Fósforo (P₂O₅)</div><div class="index-value">70-90%</div></div>
+                <div class="index-card"><div class="index-label">Potássio (K₂O)</div><div class="index-value">50-60%</div></div>
+                <div class="index-card"><div class="index-label">Cálcio (Ca)</div><div class="index-value">10-20%</div></div>
+                <div class="index-card"><div class="index-label">Magnésio (Mg)</div><div class="index-value">20-30%</div></div>
+                <div class="index-card"><div class="index-label">Enxofre (S)</div><div class="index-value">20-40%</div></div>
+                <div class="index-card"><div class="index-label">Boro (B)</div><div class="index-value">20-30%</div></div>
+                <div class="index-card"><div class="index-label">Cobre (Cu)</div><div class="index-value">25-35%</div></div>
+                <div class="index-card"><div class="index-label">Ferro (Fe)</div><div class="index-value">15-25%</div></div>
+                <div class="index-card"><div class="index-label">Manganês (Mn)</div><div class="index-value">5-10%</div></div>
+                <div class="index-card"><div class="index-label">Zinco (Zn)</div><div class="index-value">25-35%</div></div>
+                <div class="index-card"><div class="index-label">Molibdênio (Mo)</div><div class="index-value">20-40%</div></div>
+                <div class="index-card"><div class="index-label">Cobalto (Co)</div><div class="index-value">40-50%</div></div>
+                <div class="index-card"><div class="index-label">Níquel (Ni)</div><div class="index-value">20-30%</div></div>
+                <div class="index-card"><div class="index-label">Selênio (Se)</div><div class="index-value">60-85%</div></div>
+            </div>
+            <p style="color: #86868b; font-size: 0.8rem; margin-top: 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; font-style: italic;">
+                * Os índices de exportação representam a porcentagem do nutriente extraído que é exportado nos grãos.
+                Valores calculados devem ser validados com análises locais quando possível.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Dados de absorção de nutrientes em soja • <span id="footerInfo"></span></p>
+            <p style="margin-top: 1rem; font-size: 0.75rem; color: #475569;">
+                📸 Para adicionar logo e QR code: hospede os arquivos <code>logo.png</code> e <code>qrcode.png</code> no GitHub e atualize os caminhos no HTML (ou coloque na mesma pasta se for usar localmente)
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Dados de absorção
+        const absorptionPercentages = {
+            N: { V1_V3: 10, V4: 25, V5: 40, R1: 55, R3: 75, R5: 90, R6: 97.5 },
+            P: { V1_V3: 7.5, V4: 17.5, V5: 30, R1: 45, R3: 70, R5: 90, R6: 97.5 },
+            K: { V1_V3: 12.5, V4: 30, V5: 52.5, R1: 70, R3: 87.5, R5: 97.5, R6: 97.5 },
+            Ca: { V1_V3: 7.5, V4: 25, V5: 45, R1: 65, R3: 85, R5: 97.5, R6: 97.5 },
+            Mg: { V1_V3: 12.5, V4: 35, V5: 55, R1: 75, R3: 92.5, R5: 97.5, R6: 97.5 },
+            S: { V1_V3: 15, V4: 35, V5: 55, R1: 75, R3: 92.5, R5: 97.5, R6: 97.5 },
+            B: { V1_V3: 7.5, V4: 25, V5: 45, R1: 65, R3: 87.5, R5: 97.5, R6: 97.5 },
+            Cu: { V1_V3: 7.5, V4: 25, V5: 45, R1: 65, R3: 87.5, R5: 97.5, R6: 97.5 },
+            Fe: { V1_V3: 7.5, V4: 25, V5: 45, R1: 65, R3: 87.5, R5: 97.5, R6: 97.5 },
+            Mn: { V1_V3: 7.5, V4: 25, V5: 45, R1: 65, R3: 87.5, R5: 97.5, R6: 97.5 },
+            Zn: { V1_V3: 7.5, V4: 25, V5: 45, R1: 65, R3: 87.5, R5: 97.5, R6: 97.5 },
+            Mo: { V1_V3: 3.5, V4: 12.5, V5: 25, R1: 40, R3: 77.5, R5: 92.5, R6: 97.5 },
+            Co: { V1_V3: 3.5, V4: 12.5, V5: 25, R1: 40, R3: 77.5, R5: 92.5, R6: 97.5 },
+            Ni: { V1_V3: 3.5, V4: 12.5, V5: 25, R1: 40, R3: 77.5, R5: 92.5, R6: 97.5 },
+            Se: { V1_V3: 3.5, V4: 12.5, V5: 25, R1: 40, R3: 77.5, R5: 92.5, R6: 97.5 }
+        };
+
+        // Dados de nutrientes (devido ao tamanho, incluindo apenas uma versão condensada)
+        const nutrientData = {
+  "Autores": {
+    "Araújo (2023)": {
+      "Exportação": { N: 41.36, P: 3.40, K: 9.93, Ca: 0.60, Mg: 0.86, S: 1.28, Cu: 4.32, Fe: 8.93, Zn: 15.64, Mn: 4.28, B: 12.38, Se: 0, Co: 0, Mo: 0, Ni: 0 },
+      "Extração": { N: 59.94, P: 5.23, K: 18.74, Ca: 2.39, Mg: 2.70, S: 2.98, Cu: 8.63, Fe: 44.67, Zn: 31.28, Mn: 21.41, B: 32.58, Se: 0, Co: 0, Mo: 0, Ni: 0 }
+    },
+    "Kurihara et al. (2013)¹": {
+      "Exportação": { N: 42.33, P: 3.83, K: 7.29, Ca: 0.61, Mg: 0.54, S: 2.78, Cu: 13.48, Fe: 15.51, Zn: 31.66, Mn: 5.39, B: 10.07, Se: 0, Co: 0, Mo: 0, Ni: 0 },
+      "Extração": { N: 0, P: 0, K: 0, Ca: 0, Mg: 0, S: 0, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 0, Ni: 0 }
+    },
+    "Kurihara et al. (2013)138": {
+      "Exportação": { N: 0, P: 0, K: 0, Ca: 0, Mg: 0, S: 0, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 0, Ni: 0 },
+      "Extração": { N: 61.35, P: 5.89, K: 13.76, Ca: 2.13, Mg: 2.39, S: 5.96, Cu: 26.92, Fe: 78.00, Zn: 63.15, Mn: 27.10, B: 26.23, Se: 0, Co: 0, Mo: 0, Ni: 0 }
+    },
+    "Santos et al. (2008)": {
+      "Exportação": { N: 46.62, P: 2.61, K: 10.52, Ca: 0.74, Mg: 0.75, S: 0.89, Cu: 27.39, Fe: 29.81, Zn: 27.28, Mn: 5.86, B: 9.11, Se: 0, Co: 0, Mo: 0, Ni: 0 },
+      "Extração": { N: 67.57, P: 4.02, K: 19.84, Ca: 3.30, Mg: 2.81, S: 2.06, Cu: 52.98, Fe: 149.08, Zn: 53.38, Mn: 30.85, B: 23.09, Se: 0, Co: 0, Mo: 0, Ni: 0 }
+    },
+    "Bataglia & Mascarenhas (1977)": {
+      "Exportação": { N: 76.00, P: 5.70, K: 32.00, Ca: 1.90, Mg: 2.90, S: 3.10, Cu: 26.00, Fe: 46.00, Zn: 61.00, Mn: 13.00, B: 77.00, Se: 0, Co: 0, Mo: 6, Ni: 0 },
+      "Extração": { N: 64.00, P: 4.70, K: 18.00, Ca: 11.60, Mg: 6.70, S: 0, Cu: 14.00, Fe: 115.00, Zn: 43.00, Mn: 43.00, B: 24.00, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    },
+    "Borkert (1986)": {
+      "Exportação": { N: 82.00, P: 7.50, K: 24.50, Ca: 11.80, Mg: 7.40, S: 15.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 0, Ni: 0 },
+      "Extração": { N: 51.00, P: 7.60, K: 17.00, Ca: 3.30, Mg: 3.50, S: 5.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    },
+    "Cordeiro et al. (1977)": {
+      "Exportação": { N: 77.40, P: 6.00, K: 32.00, Ca: 13.40, Mg: 4.00, S: 8.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 0, Ni: 0 },
+      "Extração": { N: 64.40, P: 5.00, K: 16.50, Ca: 2.90, Mg: 2.40, S: 8.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    },
+    "Darwich (1993)": {
+      "Exportação": { N: 82.00, P: 1.00, K: 4.00, Ca: 7.00, Mg: 7.80, S: 7.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 7, Ni: 0 },
+      "Extração": { N: 58.80, P: 5.20, K: 18.70, Ca: 1.90, Mg: 2.10, S: 3.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    },
+    "EMBRAPA": {
+      "Exportação": { N: 83.00, P: 8.40, K: 25.00, Ca: 13.50, Mg: 7.30, S: 9.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 7, Ni: 0 },
+      "Extração": { N: 51.00, P: 1.00, K: 2.00, Ca: 3.10, Mg: 2.00, S: 5.00, Cu: 1, Fe: 7, Zn: 4, Mn: 3, B: 2, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    },
+    "Portafos": {
+      "Exportação": { N: 83.00, P: 15.40, K: 38.00, Ca: 12.20, Mg: 7.30, S: 15.00, Cu: 1, Fe: 0, Zn: 4, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 7, Ni: 0 },
+      "Extração": { N: 51.00, P: 1.00, K: 2.00, Ca: 3.10, Mg: 2.00, S: 5.00, Cu: 1, Fe: 7, Zn: 4, Mn: 3, B: 2, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    },
+    "Tanaka et al. (1994)": {
+      "Exportação": { N: 82.00, P: 7.50, K: 24.00, Ca: 12.00, Mg: 7.20, S: 15.00, Cu: 0, Fe: 0, Zn: 0, Mn: 0, B: 0, Se: 0, Co: 0, Mo: 7, Ni: 0 },
+      "Extração": { N: 51.00, P: 5.00, K: 17.00, Ca: 2.80, Mg: 2.00, S: 5.00, Cu: 1, Fe: 218, Zn: 4, Mn: 3, B: 2, Se: 0, Co: 0, Mo: 5, Ni: 0 }
+    }
+  },
+  "Tecnologia": {
+    "Enlist": {
+      "Exportação": { N: 37.7, P: 29.9, K: 15.8, Ca: 6.1, Mg: 18.4, S: 37.4, Cu: 29.1, Fe: 16.8, Zn: 29.1, Mn: 7.2, B: 22.8, Se: 86.7, Co: 5.0, Mo: 25.8, Ni: 21.1 },
+      "Extração": { N: 638.5, P: 142.0, K: 55.7, Ca: 147.2, Mg: 6.6, S: 8.7, Cu: 163.8, Fe: 2678.8, Zn: 674.8, Mn: 89.6, B: 692.2, Se: 6.6, Co: 2.0, Mo: 58.2, Ni: 9.6 }
+    },
+    "Xtend": {
+      "Exportação": { N: 3.6, P: 29.9, K: 15.4, Ca: 3.8, Mg: 13.2, S: 31.5, Cu: 29.8, Fe: 22.3, Zn: 25.1, Mn: 4.6, B: 21.5, Se: 68.8, Co: 4.0, Mo: 41.3, Ni: 2.0 },
+      "Extração": { N: 763.6, P: 16.5, K: 562.6, Ca: 252.7, Mg: 78.1, S: 124.3, Cu: 186.3, Fe: 4999.5, Zn: 758.8, Mn: 1184.0, B: 735.1, Se: 6.8, Co: 2.0, Mo: 44.1, Ni: 11.2 }
+    },
+    "Roundup Ready": {
+      "Exportação": { N: 38.1, P: 31.6, K: 19.3, Ca: 4.8, Mg: 17.7, S: 37.4, Cu: 33.5, Fe: 18.3, Zn: 31.3, Mn: 7.9, B: 21.6, Se: 77.3, Co: 4.0, Mo: 25.0, Ni: 27.3 },
+      "Extração": { N: 747.2, P: 151.7, K: 574.7, Ca: 187.0, Mg: 77.0, S: 11.4, Cu: 171.3, Fe: 2919.4, Zn: 756.8, Mn: 996.5, B: 776.3, Se: 11.8, Co: 2.7, Mo: 61.8, Ni: 11.4 }
+    }
+  },
+  "Cultivar": {
+    "73i75RSF": { "Exportação": { N: 57.2, P: 5.5, K: 19.0, Ca: 2.2, Mg: 2.9, S: 2.9, Cu: 9.7, Fe: 31.1, Zn: 31.6, Mn: 2.5, B: 3.9, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 82.9, P: 8.46, K: 35.85, Ca: 8.8, Mg: 9.06, S: 6.74, Cu: 19.4, Fe: 155.5, Zn: 63.2, Mn: 12.5, B: 10.26, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "75i74RSF": { "Exportação": { N: 56.4, P: 5.1, K: 17.1, Ca: 2.3, Mg: 2.8, S: 3.0, Cu: 1.1, Fe: 285.3, Zn: 3.7, Mn: 2.8, B: 36.6, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 81.74, P: 7.85, K: 32.26, Ca: 9.2, Mg: 8.75, S: 6.98, Cu: 2.2, Fe: 1426.5, Zn: 7.4, Mn: 14.0, B: 96.32, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "77EA40": { "Exportação": { N: 57.6, P: 5.1, K: 17.1, Ca: 2.3, Mg: 2.7, S: 2.7, Cu: 8.5, Fe: 51.3, Zn: 27.9, Mn: 18.6, B: 31.3, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 83.48, P: 7.85, K: 32.26, Ca: 9.2, Mg: 8.44, S: 6.28, Cu: 17.0, Fe: 256.5, Zn: 55.8, Mn: 93.0, B: 82.37, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "ADV4681 Ipro - SR1": { "Exportação": { N: 62.9, P: 5.5, K: 19.3, Ca: 2.5, Mg: 3.0, S: 3.0, Cu: 8.1, Fe: 29.2, Zn: 49.0, Mn: 24.4, B: 35.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 91.16, P: 8.46, K: 36.42, Ca: 10.0, Mg: 9.38, S: 6.98, Cu: 16.2, Fe: 146.0, Zn: 98.0, Mn: 122.0, B: 92.11, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } }
+  }
+};
+
+        const stages = ['V1-V3', 'V4', 'V5', 'R1', 'R3', 'R5', 'R6'];
+        const stageKeys = ['V1_V3', 'V4', 'V5', 'R1', 'R3', 'R5', 'R6'];
+        const nutrientNames = {
+            N: 'Nitrogênio (N)', P: 'Fósforo (P)', K: 'Potássio (K)', Ca: 'Cálcio (Ca)',
+            Mg: 'Magnésio (Mg)', S: 'Enxofre (S)', B: 'Boro (B)', Cu: 'Cobre (Cu)',
+            Fe: 'Ferro (Fe)', Mn: 'Manganês (Mn)', Zn: 'Zinco (Zn)', Mo: 'Molibdênio (Mo)',
+            Co: 'Cobalto (Co)', Ni: 'Níquel (Ni)', Se: 'Selênio (Se)'
+        };
+
+        let chartInstance = null;
+
+        function handleSourceTypeChange() {
+            const sourceType = document.getElementById('sourceType').value;
+            const sourceSelect = document.getElementById('selectedSource');
+            const sourceLabel = document.getElementById('sourceLabel');
+            
+            // Atualizar label
+            if (sourceType === 'Autores') {
+                sourceLabel.textContent = '2. Autor';
+            } else {
+                sourceLabel.textContent = '2. ' + sourceType;
+            }
+            
+            // Atualizar opções
+            sourceSelect.innerHTML = '';
+            const sources = Object.keys(nutrientData[sourceType] || {});
+            sources.forEach(source => {
+                const option = document.createElement('option');
+                option.value = source;
+                option.textContent = source;
+                sourceSelect.appendChild(option);
+            });
+            
+            updateChart();
+        }
+
+        function getDataQuality(sourceType, selectedSource, nutrient, dataType) {
+            if (!selectedSource || !nutrientData[sourceType]?.[selectedSource]?.[dataType]) {
+                return { type: 'original', label: 'Dado Original (Literatura)', color: '#1428A0' };
+            }
+            
+            const value = nutrientData[sourceType][selectedSource][dataType][nutrient];
+            
+            if (value === 0) {
+                return { type: 'calculated', label: 'Dado Calculado (Índices)', color: '#0070C9' };
+            }
+            
+            return { type: 'original', label: 'Dado Original (Literatura)', color: '#1428A0' };
+        }
+
+        function updateChart() {
+            const sourceType = document.getElementById('sourceType').value;
+            const selectedSource = document.getElementById('selectedSource').value;
+            const selectedNutrient = document.getElementById('selectedNutrient').value;
+            const dataType = document.getElementById('dataType').value;
+            const expectedYield = parseFloat(document.getElementById('expectedYield').value) || 4.2;
+
+            // Atualizar título
+            document.getElementById('chartTitle').textContent = 
+                `Curva de Absorção - ${selectedNutrient} (${dataType})`;
+
+            // Calcular dados
+            const baseValue = nutrientData[sourceType]?.[selectedSource]?.[dataType]?.[selectedNutrient] || 0;
+            const percentages = absorptionPercentages[selectedNutrient];
+            const isMacro = ['N', 'P', 'K', 'Ca', 'Mg', 'S'].includes(selectedNutrient);
+            const valuePerTon = isMacro ? baseValue : baseValue / 1000;
+            const totalValueInKg = valuePerTon * expectedYield;
+
+            // Determinar unidade
+            const unit = totalValueInKg < 1 ? 'g' : 'kg';
+            const multiplier = unit === 'g' ? 1000 : 1;
+
+            // Preparar dados do gráfico
+            const chartData = stageKeys.map(key => ({
+                percentage: percentages[key],
+                accumulated: (percentages[key] / 100) * totalValueInKg * multiplier
+            }));
+
+            // Atualizar estatísticas
+            const dataQuality = getDataQuality(sourceType, selectedSource, selectedNutrient, dataType);
+            updateStats(totalValueInKg * multiplier, expectedYield, selectedNutrient, dataQuality, unit);
+
+            // Atualizar gráfico
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const maxAccumulated = Math.max(...chartData.map(d => d.accumulated));
+            const yMax = Math.ceil(maxAccumulated * 1.1);
+
+            // Criar gradientes
+            const canvas = document.getElementById('mainChart');
+            const gradientAccumulated = canvas.getContext('2d').createLinearGradient(0, 0, 0, 400);
+            gradientAccumulated.addColorStop(0, 'rgba(20, 40, 160, 0.3)');
+            gradientAccumulated.addColorStop(0.5, 'rgba(20, 40, 160, 0.15)');
+            gradientAccumulated.addColorStop(1, 'rgba(20, 40, 160, 0.05)');
+
+            const gradientPercentage = canvas.getContext('2d').createLinearGradient(0, 0, 0, 400);
+            gradientPercentage.addColorStop(0, 'rgba(0, 112, 201, 0.25)');
+            gradientPercentage.addColorStop(0.5, 'rgba(90, 200, 250, 0.15)');
+            gradientPercentage.addColorStop(1, 'rgba(90, 200, 250, 0.05)');
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: stages,
+                    datasets: [
+                        {
+                            label: `Acumulado (${unit})`,
+                            data: chartData.map(d => d.accumulated),
+                            borderColor: '#1428A0',
+                            backgroundColor: gradientAccumulated,
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#1428A0',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '% Absorção',
+                            data: chartData.map(d => d.percentage),
+                            borderColor: '#0070C9',
+                            backgroundColor: gradientPercentage,
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 5,
+                            pointBackgroundColor: '#0070C9',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#1d1d1f',
+                                font: {
+                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                    size: 12,
+                                    weight: '500'
+                                },
+                                padding: 12,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                            titleColor: '#1d1d1f',
+                            bodyColor: '#1d1d1f',
+                            borderColor: 'rgba(209, 213, 219, 0.5)',
+                            borderWidth: 1,
+                            padding: 12,
+                            bodyFont: {
+                                family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                size: 13
+                            },
+                            titleFont: {
+                                family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                size: 14,
+                                weight: '600'
+                            },
+                            cornerRadius: 8,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.label.includes('Acumulado')) {
+                                        return `Acumulado: ${context.parsed.y.toFixed(2)} ${unit}`;
+                                    } else {
+                                        return `Absorção: ${context.parsed.y.toFixed(1)}%`;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            min: 0,
+                            max: yMax,
+                            ticks: {
+                                color: '#1428A0',
+                                font: {
+                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                    size: 11,
+                                    weight: '500'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(209, 213, 219, 0.3)',
+                                drawBorder: false
+                            },
+                            title: {
+                                display: true,
+                                text: `Acumulado (${unit})`,
+                                color: '#1428A0',
+                                font: {
+                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                color: '#0070C9',
+                                font: {
+                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                    size: 11,
+                                    weight: '500'
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                                drawBorder: false
+                            },
+                            title: {
+                                display: true,
+                                text: '% Absorção',
+                                color: '#0070C9',
+                                font: {
+                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#6e6e73',
+                                font: {
+                                    family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(209, 213, 219, 0.3)',
+                                drawBorder: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Atualizar info boxes
+            updateInfoBoxes(dataQuality, unit);
+
+            // Atualizar tabela
+            updateTable(chartData, selectedNutrient, unit);
+
+            // Atualizar footer
+            document.getElementById('footerInfo').textContent = `${sourceType}: ${selectedSource}`;
+        }
+
+        function updateStats(total, yield_, nutrient, dataQuality, unit) {
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.innerHTML = `
+                <div class="stat-card" style="background: linear-gradient(135deg, rgba(20, 40, 160, 0.12) 0%, rgba(20, 40, 160, 0.06) 100%); border: 1.5px solid rgba(20, 40, 160, 0.25);">
+                    <div class="stat-value" style="color: #0d1f80; font-weight: 700;">${total.toFixed(2)}</div>
+                    <div class="stat-label" style="color: #6e6e73; font-weight: 500;">Total ${unit}</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, rgba(0, 112, 201, 0.12) 0%, rgba(0, 112, 201, 0.06) 100%); border: 1.5px solid rgba(0, 112, 201, 0.25);">
+                    <div class="stat-value" style="color: #005a9c; font-weight: 700;">${yield_.toFixed(1)}</div>
+                    <div class="stat-label" style="color: #6e6e73; font-weight: 500;">Toneladas</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, rgba(90, 200, 250, 0.15) 0%, rgba(90, 200, 250, 0.08) 100%); border: 1.5px solid rgba(90, 200, 250, 0.3);">
+                    <div class="stat-value" style="color: #0088cc; font-weight: 700;">${nutrient}</div>
+                    <div class="stat-label" style="color: #6e6e73; font-weight: 500;">Nutriente</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, ${dataQuality.color}20 0%, ${dataQuality.color}10 100%); border: 1.5px solid ${dataQuality.color}35;">
+                    <div style="font-size: 0.875rem; font-weight: 700; color: ${dataQuality.color}; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; margin-bottom: 0.5rem;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: ${dataQuality.color}; display: inline-block; margin-right: 0.5rem;"></div>
+                        ${dataQuality.type === 'original' ? 'ORIGINAL' : 'CALCULADO'}
+                    </div>
+                    <div style="font-size: 0.75rem; color: #6e6e73; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; line-height: 1.4; font-weight: 500;">
+                        ${dataQuality.label}
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateInfoBoxes(dataQuality, unit) {
+            const infoBoxes = document.getElementById('infoBoxes');
+            let html = '';
+
+            if (dataQuality.type === 'calculated') {
+                html += `
+                    <div class="info-box" style="background: rgba(20, 40, 160, 0.06); border: 1px solid rgba(20, 40, 160, 0.15); border-radius: 12px;">
+                        <div class="info-icon" style="color: #1428A0;">ℹ️</div>
+                        <div class="info-content">
+                            <div class="info-title" style="color: #1428A0;">Dado Calculado</div>
+                            <div class="info-text">
+                                Este valor foi calculado utilizando índices de exportação baseados em literatura científica. 
+                                Não representa um dado original de pesquisa específica.
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="info-box" style="background: rgba(0, 112, 201, 0.06); border: 1px solid rgba(0, 112, 201, 0.15); border-radius: 12px;">
+                    <div class="info-icon" style="color: #0070C9;">📊</div>
+                    <div class="info-content">
+                        <div class="info-title" style="color: #0070C9;">Gráfico com Eixo Duplo</div>
+                        <div class="info-text">
+                            <strong style="color: #1428A0;">Eixo Esquerdo (azul escuro)</strong>: Valores absolutos acumulados em ${unit}<br>
+                            <strong style="color: #0070C9;">Eixo Direito (azul claro)</strong>: Porcentagem de absorção (0-100%)<br>
+                            💡 Esta configuração permite visualizar micronutrientes (valores pequenos em g) com a mesma clareza que macronutrientes (valores grandes em kg).
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            infoBoxes.innerHTML = html;
+        }
+
+        function updateTable(chartData, nutrient, unit) {
+            const tableCard = document.getElementById('tableCard');
+            tableCard.innerHTML = `
+                <h2>Dados Detalhados por Estádio - ${nutrientNames[nutrient]}</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estádio</th>
+                            <th class="right">% Absorção</th>
+                            <th class="right">Acumulado (${unit})</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${chartData.map((row, idx) => `
+                            <tr>
+                                <td>${stages[idx]}</td>
+                                <td class="right" style="color: #0070C9; font-weight: 500;">${row.percentage.toFixed(1)}%</td>
+                                <td class="right" style="color: #1428A0; font-weight: 500;">${row.accumulated.toFixed(2)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            handleSourceTypeChange();
+        });
+    </script>
+</body>
+</html>
