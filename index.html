@@ -487,6 +487,14 @@
                     <label for="expectedYield">5. Produtividade (ton)</label>
                     <input type="number" id="expectedYield" value="4.2" step="0.1" min="0.1" onchange="updateChart()">
                 </div>
+
+                <div class="filter-group">
+                    <label for="viewMode">6. Modo de Visualização</label>
+                    <select id="viewMode" onchange="updateChart()">
+                        <option value="accumulated">Acumulado</option>
+                        <option value="perStage">Por Estádio</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -639,7 +647,54 @@
     "73i75RSF": { "Exportação": { N: 57.2, P: 5.5, K: 19.0, Ca: 2.2, Mg: 2.9, S: 2.9, Cu: 9.7, Fe: 31.1, Zn: 31.6, Mn: 2.5, B: 3.9, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 82.9, P: 8.46, K: 35.85, Ca: 8.8, Mg: 9.06, S: 6.74, Cu: 19.4, Fe: 155.5, Zn: 63.2, Mn: 12.5, B: 10.26, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
     "75i74RSF": { "Exportação": { N: 56.4, P: 5.1, K: 17.1, Ca: 2.3, Mg: 2.8, S: 3.0, Cu: 1.1, Fe: 285.3, Zn: 3.7, Mn: 2.8, B: 36.6, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 81.74, P: 7.85, K: 32.26, Ca: 9.2, Mg: 8.75, S: 6.98, Cu: 2.2, Fe: 1426.5, Zn: 7.4, Mn: 14.0, B: 96.32, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
     "77EA40": { "Exportação": { N: 57.6, P: 5.1, K: 17.1, Ca: 2.3, Mg: 2.7, S: 2.7, Cu: 8.5, Fe: 51.3, Zn: 27.9, Mn: 18.6, B: 31.3, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 83.48, P: 7.85, K: 32.26, Ca: 9.2, Mg: 8.44, S: 6.28, Cu: 17.0, Fe: 256.5, Zn: 55.8, Mn: 93.0, B: 82.37, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
-    "ADV4681 Ipro - SR1": { "Exportação": { N: 62.9, P: 5.5, K: 19.3, Ca: 2.5, Mg: 3.0, S: 3.0, Cu: 8.1, Fe: 29.2, Zn: 49.0, Mn: 24.4, B: 35.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 91.16, P: 8.46, K: 36.42, Ca: 10.0, Mg: 9.38, S: 6.98, Cu: 16.2, Fe: 146.0, Zn: 98.0, Mn: 122.0, B: 92.11, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } }
+    "ADV4681 Ipro - SR1": { "Exportação": { N: 62.9, P: 5.5, K: 19.3, Ca: 2.5, Mg: 3.0, S: 3.0, Cu: 8.1, Fe: 29.2, Zn: 49.0, Mn: 24.4, B: 35.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 91.16, P: 8.46, K: 36.42, Ca: 10.0, Mg: 9.38, S: 6.98, Cu: 16.2, Fe: 146.0, Zn: 98.0, Mn: 122.0, B: 92.11, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "ADV4681 Ipro - SR2": { "Exportação": { N: 6.0, P: 5.5, K: 21.0, Ca: 2.3, Mg: 2.9, S: 3.2, Cu: 8.4, Fe: 26.0, Zn: 42.2, Mn: 23.1, B: 31.9, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 8.7, P: 8.46, K: 39.62, Ca: 9.2, Mg: 9.06, S: 7.44, Cu: 16.8, Fe: 130.0, Zn: 84.4, Mn: 115.5, B: 83.95, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "ADV4681 Ipro - SR3": { "Exportação": { N: 63.8, P: 5.4, K: 2.7, Ca: 2.4, Mg: 2.7, S: 3.1, Cu: 8.4, Fe: 17.2, Zn: 37.4, Mn: 43.9, B: 31.8, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 92.46, P: 8.31, K: 5.09, Ca: 9.6, Mg: 8.44, S: 7.21, Cu: 16.8, Fe: 86.0, Zn: 74.8, Mn: 219.5, B: 83.68, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "AS3595i2x": { "Exportação": { N: 66.9, P: 5.7, K: 19.2, Ca: 3.0, Mg: 3.3, S: 3.1, Cu: 1.0, Fe: 34.5, Zn: 35.1, Mn: 22.7, B: 35.4, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 96.96, P: 8.77, K: 36.23, Ca: 12.0, Mg: 10.31, S: 7.21, Cu: 2.0, Fe: 172.5, Zn: 70.2, Mn: 113.5, B: 93.16, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "AS3640i2x": { "Exportação": { N: 62.1, P: 5.6, K: 19.3, Ca: 1.7, Mg: 2.4, S: 3.2, Cu: 8.8, Fe: 76.0, Zn: 32.6, Mn: 18.8, B: 33.7, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 90.0, P: 8.62, K: 36.42, Ca: 6.8, Mg: 7.5, S: 7.44, Cu: 17.6, Fe: 380.0, Zn: 65.2, Mn: 94.0, B: 88.68, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "AS3700XTD": { "Exportação": { N: 59.4, P: 5.2, K: 18.6, Ca: 2.3, Mg: 2.3, S: 3.1, Cu: 8.1, Fe: 48.5, Zn: 27.8, Mn: 19.0, B: 29.8, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 86.09, P: 8.0, K: 35.09, Ca: 9.2, Mg: 7.19, S: 7.21, Cu: 16.2, Fe: 242.5, Zn: 55.6, Mn: 95.0, B: 78.42, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "AS3707I2X": { "Exportação": { N: 59.9, P: 5.5, K: 19.3, Ca: 2.1, Mg: 2.5, S: 3.1, Cu: 8.2, Fe: 29.8, Zn: 28.6, Mn: 2.5, B: 3.4, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 86.81, P: 8.46, K: 36.42, Ca: 8.4, Mg: 7.81, S: 7.21, Cu: 16.4, Fe: 149.0, Zn: 57.2, Mn: 12.5, B: 8.95, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "AS3790i2x": { "Exportação": { N: 61.5, P: 4.8, K: 18.0, Ca: 2.0, Mg: 2.5, S: 2.9, Cu: 8.4, Fe: 58.7, Zn: 25.3, Mn: 21.0, B: 28.7, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 89.13, P: 7.38, K: 33.96, Ca: 8.0, Mg: 7.81, S: 6.74, Cu: 16.8, Fe: 293.5, Zn: 50.6, Mn: 105.0, B: 75.53, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CREDENZ CZ37B39": { "Exportação": { N: 6.7, P: 5.4, K: 18.3, Ca: 2.5, Mg: 2.9, S: 3.0, Cu: 1.8, Fe: 35.9, Zn: 3.3, Mn: 2.0, B: 34.7, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 9.71, P: 8.31, K: 34.53, Ca: 10.0, Mg: 9.06, S: 6.98, Cu: 3.6, Fe: 179.5, Zn: 6.6, Mn: 10.0, B: 91.32, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CZ16B17 IPRO": { "Exportação": { N: 62.4, P: 5.5, K: 18.4, Ca: 2.5, Mg: 2.6, S: 2.9, Cu: 8.9, Fe: 52.0, Zn: 31.3, Mn: 19.8, B: 3.8, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 90.43, P: 8.46, K: 34.72, Ca: 10.0, Mg: 8.13, S: 6.74, Cu: 17.8, Fe: 260.0, Zn: 62.6, Mn: 99.0, B: 10.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CZ37B39 I2X": { "Exportação": { N: 63.6, P: 5.1, K: 18.1, Ca: 2.6, Mg: 2.9, S: 3.3, Cu: 9.0, Fe: 41.6, Zn: 29.4, Mn: 22.9, B: 35.5, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 92.17, P: 7.85, K: 34.15, Ca: 10.4, Mg: 9.06, S: 7.67, Cu: 18.0, Fe: 208.0, Zn: 58.8, Mn: 114.5, B: 93.42, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CZ37B43": { "Exportação": { N: 61.8, P: 5.3, K: 18.5, Ca: 2.8, Mg: 3.1, S: 3.2, Cu: 8.8, Fe: 3.5, Zn: 27.5, Mn: 24.8, B: 34.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 89.57, P: 8.15, K: 34.91, Ca: 11.2, Mg: 9.69, S: 7.44, Cu: 17.6, Fe: 17.5, Zn: 55.0, Mn: 124.0, B: 89.47, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CZ37B43Ipro - PM": { "Exportação": { N: 61.1, P: 5.5, K: 18.6, Ca: 2.2, Mg: 3.1, S: 2.9, Cu: 9.8, Fe: 41.1, Zn: 31.9, Mn: 19.4, B: 3.3, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 88.55, P: 8.46, K: 35.09, Ca: 8.8, Mg: 9.69, S: 6.74, Cu: 19.6, Fe: 205.5, Zn: 63.8, Mn: 97.0, B: 8.68, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CZ37B43Ipro - PO1": { "Exportação": { N: 53.0, P: 5.3, K: 17.9, Ca: 2.4, Mg: 2.9, S: 2.8, Cu: 7.8, Fe: 12.6, Zn: 28.7, Mn: 14.8, B: 3.1, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 76.81, P: 8.15, K: 33.77, Ca: 9.6, Mg: 9.06, S: 6.51, Cu: 15.6, Fe: 63.0, Zn: 57.4, Mn: 74.0, B: 8.16, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "CZ37B43Ipro - PO2": { "Exportação": { N: 57.9, P: 5.3, K: 18.3, Ca: 2.8, Mg: 2.7, S: 2.6, Cu: 7.5, Fe: 22.0, Zn: 29.4, Mn: 14.9, B: 32.8, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 83.91, P: 8.15, K: 34.53, Ca: 11.2, Mg: 8.44, S: 6.05, Cu: 15.0, Fe: 110.0, Zn: 58.8, Mn: 74.5, B: 86.32, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "Dagma 7621": { "Exportação": { N: 57.8, P: 5.0, K: 17.8, Ca: 2.2, Mg: 2.6, S: 3.0, Cu: 9.1, Fe: 44.2, Zn: 3.4, Mn: 21.5, B: 33.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 83.77, P: 7.69, K: 33.58, Ca: 8.8, Mg: 8.13, S: 6.98, Cu: 18.2, Fe: 221.0, Zn: 6.8, Mn: 107.5, B: 86.84, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "Dagma 7921": { "Exportação": { N: 6.0, P: 4.5, K: 18.2, Ca: 2.5, Mg: 2.9, S: 2.7, Cu: 7.8, Fe: 47.0, Zn: 27.8, Mn: 21.9, B: 28.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 8.7, P: 6.92, K: 34.34, Ca: 10.0, Mg: 9.06, S: 6.28, Cu: 15.6, Fe: 235.0, Zn: 55.6, Mn: 109.5, B: 73.68, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "Desafio - PER1": { "Exportação": { N: 6.8, P: 5.0, K: 19.2, Ca: 2.1, Mg: 2.6, S: 3.1, Cu: 1.4, Fe: 23.7, Zn: 37.6, Mn: 19.9, B: 33.0, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 9.86, P: 7.69, K: 36.23, Ca: 8.4, Mg: 8.13, S: 7.21, Cu: 2.8, Fe: 118.5, Zn: 75.2, Mn: 99.5, B: 86.84, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "DESAFIO (8473 RFS)": { "Exportação": { N: 61.7, P: 4.5, K: 18.1, Ca: 2.5, Mg: 2.6, S: 2.9, Cu: 7.8, Fe: 29.8, Zn: 25.9, Mn: 23.1, B: 31.8, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 89.42, P: 6.92, K: 34.15, Ca: 10.0, Mg: 8.13, S: 6.74, Cu: 15.6, Fe: 149.0, Zn: 51.8, Mn: 115.5, B: 83.68, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "Desafio RR - BM1": { "Exportação": { N: 57.8, P: 5.5, K: 22.3, Ca: 2.3, Mg: 3.0, S: 3.1, Cu: 7.3, Fe: 17.3, Zn: 48.0, Mn: 27.7, B: 31.9, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 83.77, P: 8.46, K: 42.08, Ca: 9.2, Mg: 9.38, S: 7.21, Cu: 14.6, Fe: 86.5, Zn: 96.0, Mn: 138.5, B: 83.95, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "Desafio RR - BM2": { "Exportação": { N: 61.5, P: 5.2, K: 19.5, Ca: 2.3, Mg: 2.8, S: 3.1, Cu: 6.0, Fe: 26.2, Zn: 28.2, Mn: 18.7, B: 3.3, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 }, "Extração": { N: 89.13, P: 8.0, K: 36.79, Ca: 9.2, Mg: 8.75, S: 7.21, Cu: 12.0, Fe: 131.0, Zn: 56.4, Mn: 93.5, B: 8.68, Se: 0.0, Co: 0.0, Mo: 0.0, Ni: 0.0 } },
+    "Desafio RR - PER2": { "Exportação": { N: 58.2, P: 5.7, K: 2.3, Ca: 2.0, Mg: 2.6, S: 3.4, Cu: 9.3, Fe: 16.7, Zn: 4.4, Mn: 19.1, B: 34.6, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 84.35, P: 8.77, K: 4.34, Ca: 8.0, Mg: 8.13, S: 7.91, Cu: 18.6, Fe: 83.5, Zn: 8.8, Mn: 95.5, B: 91.05, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Desafio RR - VM": { "Exportação": { N: 57.8, P: 5.2, K: 19.6, Ca: 2.7, Mg: 2.6, S: 3.1, Cu: 9.1, Fe: 22.7, Zn: 34.3, Mn: 22.5, B: 31.6, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 83.77, P: 8.0, K: 36.98, Ca: 10.8, Mg: 8.13, S: 7.21, Cu: 18.2, Fe: 113.5, Zn: 68.6, Mn: 112.5, B: 83.16, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "DM 69IX69": { "Exportação": { N: 59.9, P: 5.6, K: 18.2, Ca: 3.3, Mg: 2.8, S: 3.4, Cu: 7.2, Fe: 3.1, Zn: 25.8, Mn: 22.3, B: 32.0, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 86.81, P: 8.62, K: 34.34, Ca: 13.2, Mg: 8.75, S: 7.91, Cu: 14.4, Fe: 15.5, Zn: 51.6, Mn: 111.5, B: 84.21, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "DM 72IX74": { "Exportação": { N: 61.3, P: 5.1, K: 18.1, Ca: 2.2, Mg: 2.7, S: 2.9, Cu: 9.6, Fe: 31.6, Zn: 29.2, Mn: 18.6, B: 28.4, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 88.84, P: 7.85, K: 34.15, Ca: 8.8, Mg: 8.44, S: 6.74, Cu: 19.2, Fe: 158.0, Zn: 58.4, Mn: 93.0, B: 74.74, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "DM 74K75": { "Exportação": { N: 63.2, P: 4.7, K: 19.2, Ca: 2.2, Mg: 2.4, S: 3.0, Cu: 7.6, Fe: 36.7, Zn: 26.7, Mn: 19.8, B: 35.3, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 91.59, P: 7.23, K: 36.23, Ca: 8.8, Mg: 7.5, S: 6.98, Cu: 15.2, Fe: 183.5, Zn: 53.4, Mn: 99.0, B: 92.89, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "DM 76IX77": { "Exportação": { N: 59.3, P: 4.7, K: 16.1, Ca: 2.2, Mg: 2.2, S: 2.9, Cu: 8.0, Fe: 48.1, Zn: 26.9, Mn: 21.5, B: 34.8, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 85.94, P: 7.23, K: 30.38, Ca: 8.8, Mg: 6.88, S: 6.74, Cu: 16.0, Fe: 240.5, Zn: 53.8, Mn: 107.5, B: 91.58, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Exata i2x (OURO VERDE) (64 IX60RFS)": { "Exportação": { N: 6.0, P: 5.4, K: 17.9, Ca: 2.1, Mg: 2.8, S: 2.9, Cu: 7.7, Fe: 38.2, Zn: 26.5, Mn: 19.1, B: 34.0, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 8.7, P: 8.31, K: 33.77, Ca: 8.4, Mg: 8.75, S: 6.74, Cu: 15.4, Fe: 191.0, Zn: 53.0, Mn: 95.5, B: 89.47, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "FOCO (74177 RFS)": { "Exportação": { N: 56.2, P: 5.5, K: 18.8, Ca: 2.6, Mg: 2.7, S: 3.1, Cu: 8.4, Fe: 26.0, Zn: 31.5, Mn: 21.9, B: 36.5, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 81.45, P: 8.46, K: 35.47, Ca: 10.4, Mg: 8.44, S: 7.21, Cu: 16.8, Fe: 130.0, Zn: 63.0, Mn: 109.5, B: 96.05, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Guepardo IPRO (67168 RFS)": { "Exportação": { N: 63.2, P: 5.5, K: 17.6, Ca: 3.1, Mg: 2.6, S: 3.0, Cu: 8.5, Fe: 32.6, Zn: 3.5, Mn: 21.4, B: 29.1, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 91.59, P: 8.46, K: 33.21, Ca: 12.4, Mg: 8.13, S: 6.98, Cu: 17.0, Fe: 163.0, Zn: 7.0, Mn: 107.0, B: 76.58, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "HO PARAGUAÇU (64HO130 I2X)": { "Exportação": { N: 57.5, P: 5.1, K: 17.8, Ca: 1.8, Mg: 2.4, S: 3.0, Cu: 7.2, Fe: 38.1, Zn: 25.5, Mn: 18.9, B: 35.0, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 83.33, P: 7.85, K: 33.58, Ca: 7.2, Mg: 7.5, S: 6.98, Cu: 14.4, Fe: 190.5, Zn: 51.0, Mn: 94.5, B: 92.11, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "HO TAQUARI (80 H0 110)": { "Exportação": { N: 6.3, P: 4.9, K: 18.0, Ca: 2.3, Mg: 2.6, S: 2.9, Cu: 1.3, Fe: 69.7, Zn: 25.3, Mn: 2.8, B: 32.9, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 9.13, P: 7.54, K: 33.96, Ca: 9.2, Mg: 8.13, S: 6.74, Cu: 2.6, Fe: 348.5, Zn: 50.6, Mn: 14.0, B: 86.58, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Juruena Ipro - SR1": { "Exportação": { N: 54.3, P: 5.1, K: 21.8, Ca: 2.6, Mg: 2.5, S: 2.9, Cu: 6.1, Fe: 1.3, Zn: 34.3, Mn: 24.0, B: 32.9, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 78.7, P: 7.85, K: 41.13, Ca: 10.4, Mg: 7.81, S: 6.74, Cu: 12.2, Fe: 6.5, Zn: 68.6, Mn: 120.0, B: 86.58, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Juruena Ipro - SR2": { "Exportação": { N: 55.4, P: 5.3, K: 2.9, Ca: 2.8, Mg: 2.7, S: 2.8, Cu: 7.5, Fe: 17.1, Zn: 4.7, Mn: 22.4, B: 35.3, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 80.29, P: 8.15, K: 5.47, Ca: 11.2, Mg: 8.44, S: 6.51, Cu: 15.0, Fe: 85.5, Zn: 9.4, Mn: 112.0, B: 92.89, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Juruena Ipro - SR3": { "Exportação": { N: 58.0, P: 5.8, K: 21.8, Ca: 2.5, Mg: 2.6, S: 2.9, Cu: 7.4, Fe: 15.1, Zn: 44.9, Mn: 29.9, B: 39.6, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 84.06, P: 8.92, K: 41.13, Ca: 10.0, Mg: 8.13, S: 6.74, Cu: 14.8, Fe: 75.5, Zn: 89.8, Mn: 149.5, B: 104.21, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "K7922I2X": { "Exportação": { N: 61.4, P: 5.0, K: 19.4, Ca: 2.2, Mg: 2.8, S: 3.1, Cu: 1.0, Fe: 42.9, Zn: 31.9, Mn: 21.2, B: 32.3, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 88.99, P: 7.69, K: 36.6, Ca: 8.8, Mg: 8.75, S: 7.21, Cu: 2.0, Fe: 214.5, Zn: 63.8, Mn: 106.0, B: 85.0, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "LENDARIA (80K80 RFS)": { "Exportação": { N: 6.7, P: 4.9, K: 19.1, Ca: 2.4, Mg: 2.5, S: 2.7, Cu: 8.2, Fe: 78.6, Zn: 27.6, Mn: 19.1, B: 25.1, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 9.71, P: 7.54, K: 36.04, Ca: 9.6, Mg: 7.81, S: 6.28, Cu: 16.4, Fe: 393.0, Zn: 55.2, Mn: 95.5, B: 66.05, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "M 6430 XTD": { "Exportação": { N: 62.4, P: 4.8, K: 17.3, Ca: 3.0, Mg: 3.0, S: 3.1, Cu: 7.7, Fe: 73.4, Zn: 23.6, Mn: 22.4, B: 26.6, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 90.43, P: 7.38, K: 32.64, Ca: 12.0, Mg: 9.38, S: 7.21, Cu: 15.4, Fe: 367.0, Zn: 47.2, Mn: 112.0, B: 70.0, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "M6100 XTD": { "Exportação": { N: 6.7, P: 5.3, K: 19.0, Ca: 2.0, Mg: 2.5, S: 2.9, Cu: 8.9, Fe: 25.3, Zn: 26.7, Mn: 18.8, B: 32.0, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 9.71, P: 8.15, K: 35.85, Ca: 8.0, Mg: 7.81, S: 6.74, Cu: 17.8, Fe: 126.5, Zn: 53.4, Mn: 94.0, B: 84.21, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "M6110 i2x": { "Exportação": { N: 57.3, P: 5.6, K: 18.5, Ca: 2.2, Mg: 2.5, S: 2.9, Cu: 9.6, Fe: 56.6, Zn: 33.1, Mn: 22.0, B: 31.4, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 83.04, P: 8.62, K: 34.91, Ca: 8.8, Mg: 7.81, S: 6.74, Cu: 19.2, Fe: 283.0, Zn: 66.2, Mn: 110.0, B: 82.63, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "M6210 Ipro": { "Exportação": { N: 58.6, P: 5.2, K: 19.9, Ca: 2.2, Mg: 2.6, S: 3.0, Cu: 8.4, Fe: 28.8, Zn: 28.7, Mn: 2.6, B: 31.3, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 84.93, P: 8.0, K: 37.55, Ca: 8.8, Mg: 8.13, S: 6.98, Cu: 16.8, Fe: 144.0, Zn: 57.4, Mn: 13.0, B: 82.37, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "NEO750": { "Exportação": { N: 6.4, P: 4.9, K: 16.7, Ca: 2.5, Mg: 2.6, S: 2.9, Cu: 9.0, Fe: 86.5, Zn: 3.5, Mn: 2.7, B: 38.7, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 9.28, P: 7.54, K: 31.51, Ca: 10.0, Mg: 8.13, S: 6.74, Cu: 18.0, Fe: 432.5, Zn: 7.0, Mn: 13.5, B: 101.84, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "NEOGEN 680": { "Exportação": { N: 61.3, P: 5.9, K: 18.8, Ca: 2.4, Mg: 2.4, S: 3.2, Cu: 1.0, Fe: 4.6, Zn: 29.3, Mn: 18.7, B: 34.9, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 88.84, P: 9.08, K: 35.47, Ca: 9.6, Mg: 7.5, S: 7.44, Cu: 2.0, Fe: 23.0, Zn: 58.6, Mn: 93.5, B: 91.84, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "NEOGEN 71E": { "Exportação": { N: 59.2, P: 5.4, K: 17.8, Ca: 2.2, Mg: 2.8, S: 3.0, Cu: 9.0, Fe: 143.1, Zn: 29.0, Mn: 19.0, B: 28.6, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 85.8, P: 8.31, K: 33.58, Ca: 8.8, Mg: 8.75, S: 6.98, Cu: 18.0, Fe: 715.5, Zn: 58.0, Mn: 95.0, B: 75.26, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "NEOGEN 720": { "Exportação": { N: 57.3, P: 5.3, K: 18.8, Ca: 2.7, Mg: 2.9, S: 3.0, Cu: 9.6, Fe: 3.8, Zn: 29.4, Mn: 22.9, B: 34.4, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 83.04, P: 8.15, K: 35.47, Ca: 10.8, Mg: 9.06, S: 6.98, Cu: 19.2, Fe: 19.0, Zn: 58.8, Mn: 114.5, B: 90.53, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "NEOGEN 770": { "Exportação": { N: 59.3, P: 5.2, K: 16.3, Ca: 2.7, Mg: 2.7, S: 3.0, Cu: 9.4, Fe: 51.0, Zn: 32.2, Mn: 21.2, B: 38.0, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 85.94, P: 8.0, K: 30.75, Ca: 10.8, Mg: 8.44, S: 6.98, Cu: 18.8, Fe: 255.0, Zn: 64.4, Mn: 106.0, B: 100.0, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "Olimpo (80182 RFS)": { "Exportação": { N: 63.2, P: 4.6, K: 18.4, Ca: 2.6, Mg: 2.9, S: 2.6, Cu: 8.8, Fe: 37.9, Zn: 26.3, Mn: 19.9, B: 35.3, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 91.59, P: 7.08, K: 34.72, Ca: 10.4, Mg: 9.06, S: 6.05, Cu: 17.6, Fe: 189.5, Zn: 52.6, Mn: 99.5, B: 92.89, Se: 0, Co: 0, Mo: 0, Ni: 0 } },
+    "SUPERA i2x (BRASMAX)(73IX74)": { "Exportação": { N: 62.9, P: 5.4, K: 17.7, Ca: 2.2, Mg: 2.7, S: 2.8, Cu: 9.8, Fe: 37.9, Zn: 29.8, Mn: 2.4, B: 29.3, Se: 0, Co: 0, Mo: 0, Ni: 0 }, "Extração": { N: 91.16, P: 8.31, K: 33.4, Ca: 8.8, Mg: 8.44, S: 6.51, Cu: 19.6, Fe: 189.5, Zn: 59.6, Mn: 12.0, B: 77.11, Se: 0, Co: 0, Mo: 0, Ni: 0 } }
   }
 };
 
@@ -699,10 +754,12 @@
             const selectedNutrient = document.getElementById('selectedNutrient').value;
             const dataType = document.getElementById('dataType').value;
             const expectedYield = parseFloat(document.getElementById('expectedYield').value) || 4.2;
+            const viewMode = document.getElementById('viewMode').value;
 
             // Atualizar título
+            const modeText = viewMode === 'accumulated' ? 'Acumulada' : 'Por Estádio';
             document.getElementById('chartTitle').textContent = 
-                `Curva de Absorção - ${selectedNutrient} (${dataType})`;
+                `Curva de Absorção ${modeText} - ${selectedNutrient} (${dataType})`;
 
             // Calcular dados
             const baseValue = nutrientData[sourceType]?.[selectedSource]?.[dataType]?.[selectedNutrient] || 0;
@@ -715,11 +772,28 @@
             const unit = totalValueInKg < 1 ? 'g' : 'kg';
             const multiplier = unit === 'g' ? 1000 : 1;
 
-            // Preparar dados do gráfico
-            const chartData = stageKeys.map(key => ({
-                percentage: percentages[key],
-                accumulated: (percentages[key] / 100) * totalValueInKg * multiplier
-            }));
+            // Preparar dados do gráfico baseado no modo
+            let chartData;
+            if (viewMode === 'accumulated') {
+                // VALORES ACUMULADOS
+                chartData = stageKeys.map(key => ({
+                    percentage: percentages[key],
+                    value: (percentages[key] / 100) * totalValueInKg * multiplier
+                }));
+            } else {
+                // VALORES POR ESTÁDIO
+                chartData = stageKeys.map((key, index) => {
+                    const currentPercentage = percentages[key];
+                    const previousPercentage = index > 0 ? percentages[stageKeys[index - 1]] : 0;
+                    const stagePercentage = currentPercentage - previousPercentage;
+                    const stageValue = (stagePercentage / 100) * totalValueInKg * multiplier;
+                    
+                    return {
+                        percentage: stagePercentage,
+                        value: stageValue
+                    };
+                });
+            }
 
             // Atualizar estatísticas
             const dataQuality = getDataQuality(sourceType, selectedSource, selectedNutrient, dataType);
@@ -732,8 +806,8 @@
                 chartInstance.destroy();
             }
 
-            const maxAccumulated = Math.max(...chartData.map(d => d.accumulated));
-            const yMax = Math.ceil(maxAccumulated * 1.1);
+            const maxValue = Math.max(...chartData.map(d => d.value));
+            const yMax = Math.ceil(maxValue * 1.1);
 
             // Criar gradientes
             const canvas = document.getElementById('mainChart');
@@ -747,14 +821,17 @@
             gradientPercentage.addColorStop(0.5, 'rgba(90, 200, 250, 0.15)');
             gradientPercentage.addColorStop(1, 'rgba(90, 200, 250, 0.05)');
 
+            const labelPrefix = viewMode === 'accumulated' ? 'Acumulado' : 'Neste Estádio';
+            const percentLabel = viewMode === 'accumulated' ? '% Acumulada' : '% Neste Estádio';
+
             chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: stages,
                     datasets: [
                         {
-                            label: `Acumulado (${unit})`,
-                            data: chartData.map(d => d.accumulated),
+                            label: `${labelPrefix} (${unit})`,
+                            data: chartData.map(d => d.value),
                             borderColor: '#1428A0',
                             backgroundColor: gradientAccumulated,
                             borderWidth: 3,
@@ -767,7 +844,7 @@
                             yAxisID: 'y'
                         },
                         {
-                            label: '% Absorção',
+                            label: percentLabel,
                             data: chartData.map(d => d.percentage),
                             borderColor: '#0070C9',
                             backgroundColor: gradientPercentage,
@@ -824,10 +901,14 @@
                             displayColors: true,
                             callbacks: {
                                 label: function(context) {
-                                    if (context.dataset.label.includes('Acumulado')) {
-                                        return `Acumulado: ${context.parsed.y.toFixed(2)} ${unit}`;
+                                    const mode = document.getElementById('viewMode').value;
+                                    const prefix = mode === 'accumulated' ? 'Acumulado' : 'Neste Estádio';
+                                    const percentPrefix = mode === 'accumulated' ? '% Acumulada' : '% Neste Estádio';
+                                    
+                                    if (context.datasetIndex === 0) {
+                                        return `${prefix}: ${context.parsed.y.toFixed(2)} ${unit}`;
                                     } else {
-                                        return `Absorção: ${context.parsed.y.toFixed(1)}%`;
+                                        return `${percentPrefix}: ${context.parsed.y.toFixed(1)}%`;
                                     }
                                 }
                             }
@@ -853,7 +934,7 @@
                             },
                             title: {
                                 display: true,
-                                text: `Acumulado (${unit})`,
+                                text: labelPrefix + ` (${unit})`,
                                 color: '#1428A0',
                                 font: {
                                     family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
@@ -881,7 +962,7 @@
                             },
                             title: {
                                 display: true,
-                                text: '% Absorção',
+                                text: percentLabel,
                                 color: '#0070C9',
                                 font: {
                                     family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
@@ -946,6 +1027,7 @@
 
         function updateInfoBoxes(dataQuality, unit) {
             const infoBoxes = document.getElementById('infoBoxes');
+            const viewMode = document.getElementById('viewMode').value;
             let html = '';
 
             if (dataQuality.type === 'calculated') {
@@ -963,33 +1045,53 @@
                 `;
             }
 
-            html += `
-                <div class="info-box" style="background: rgba(0, 112, 201, 0.06); border: 1px solid rgba(0, 112, 201, 0.15); border-radius: 12px;">
-                    <div class="info-icon" style="color: #0070C9;">📊</div>
-                    <div class="info-content">
-                        <div class="info-title" style="color: #0070C9;">Gráfico com Eixo Duplo</div>
-                        <div class="info-text">
-                            <strong style="color: #1428A0;">Eixo Esquerdo (azul escuro)</strong>: Valores absolutos acumulados em ${unit}<br>
-                            <strong style="color: #0070C9;">Eixo Direito (azul claro)</strong>: Porcentagem de absorção (0-100%)<br>
-                            💡 Esta configuração permite visualizar micronutrientes (valores pequenos em g) com a mesma clareza que macronutrientes (valores grandes em kg).
+            if (viewMode === 'accumulated') {
+                html += `
+                    <div class="info-box" style="background: rgba(0, 112, 201, 0.06); border: 1px solid rgba(0, 112, 201, 0.15); border-radius: 12px;">
+                        <div class="info-icon" style="color: #0070C9;">📊</div>
+                        <div class="info-content">
+                            <div class="info-title" style="color: #0070C9;">Curva de Absorção Acumulada</div>
+                            <div class="info-text">
+                                <strong style="color: #1428A0;">Eixo Esquerdo:</strong> Total de nutriente absorvido desde V1 até aquele estádio em ${unit}<br>
+                                <strong style="color: #0070C9;">Eixo Direito:</strong> Porcentagem total absorvida desde V1 até aquele estádio<br>
+                                💡 Modo <strong>Acumulado</strong> - mostra o total absorvido até cada estádio (padrão em agronomia).
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                html += `
+                    <div class="info-box" style="background: rgba(0, 112, 201, 0.06); border: 1px solid rgba(0, 112, 201, 0.15); border-radius: 12px;">
+                        <div class="info-icon" style="color: #0070C9;">📊</div>
+                        <div class="info-content">
+                            <div class="info-title" style="color: #0070C9;">Absorção Por Estádio</div>
+                            <div class="info-text">
+                                <strong style="color: #1428A0;">Eixo Esquerdo:</strong> Quantidade absorvida especificamente naquele estádio em ${unit}<br>
+                                <strong style="color: #0070C9;">Eixo Direito:</strong> Porcentagem absorvida especificamente naquele estádio<br>
+                                💡 Modo <strong>Por Estádio</strong> - mostra apenas o que foi absorvido em cada estádio individual.
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
             infoBoxes.innerHTML = html;
         }
 
         function updateTable(chartData, nutrient, unit) {
             const tableCard = document.getElementById('tableCard');
+            const viewMode = document.getElementById('viewMode').value;
+            const headerPercent = viewMode === 'accumulated' ? '% Acumulada' : '% no Estádio';
+            const headerValue = viewMode === 'accumulated' ? 'Acumulado' : 'No Estádio';
+            
             tableCard.innerHTML = `
                 <h2>Dados Detalhados por Estádio - ${nutrientNames[nutrient]}</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Estádio</th>
-                            <th class="right">% Absorção</th>
-                            <th class="right">Acumulado (${unit})</th>
+                            <th class="right">${headerPercent}</th>
+                            <th class="right">${headerValue} (${unit})</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -997,7 +1099,7 @@
                             <tr>
                                 <td>${stages[idx]}</td>
                                 <td class="right" style="color: #0070C9; font-weight: 500;">${row.percentage.toFixed(1)}%</td>
-                                <td class="right" style="color: #1428A0; font-weight: 500;">${row.accumulated.toFixed(2)}</td>
+                                <td class="right" style="color: #1428A0; font-weight: 500;">${row.value.toFixed(2)}</td>
                             </tr>
                         `).join('')}
                     </tbody>
