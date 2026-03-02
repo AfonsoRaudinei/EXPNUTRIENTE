@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Absorção de Nutrientes em Soja</title>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ExpNutriente">
+    <link rel="apple-touch-icon" href="logo.png">
+    <!-- Theme color for Chrome/Android -->
+    <meta name="theme-color" content="#0d2818">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -932,9 +941,70 @@
         `;
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        handleSourceTypeChange();
+    // ── LOCALSTORAGE: save and restore user preferences ──────────────
+    const PREFS_KEY = 'expnutriente_prefs';
+
+    function savePreferences() {
+        try {
+            const prefs = {
+                sourceType: document.getElementById('sourceType').value,
+                selectedSource: document.getElementById('selectedSource').value,
+                selectedNutrient: document.getElementById('selectedNutrient').value,
+                dataType: document.getElementById('dataType').value,
+                expectedYield: document.getElementById('expectedYield').value,
+                viewMode: document.getElementById('viewMode').value
+            };
+            localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+        } catch (e) {
+            // localStorage may be unavailable in some private-browsing modes
+        }
+    }
+
+    function loadPreferences() {
+        try {
+            const stored = localStorage.getItem(PREFS_KEY);
+            if (!stored) return;
+            const prefs = JSON.parse(stored);
+            if (prefs.sourceType) document.getElementById('sourceType').value = prefs.sourceType;
+            if (prefs.selectedNutrient) document.getElementById('selectedNutrient').value = prefs.selectedNutrient;
+            if (prefs.dataType) document.getElementById('dataType').value = prefs.dataType;
+            if (prefs.expectedYield) document.getElementById('expectedYield').value = prefs.expectedYield;
+            if (prefs.viewMode) document.getElementById('viewMode').value = prefs.viewMode;
+            // sourceSelect options depend on sourceType, so populate first then restore
+            handleSourceTypeChange();
+            if (prefs.selectedSource) {
+                const sourceSelect = document.getElementById('selectedSource');
+                for (let i = 0; i < sourceSelect.options.length; i++) {
+                    if (sourceSelect.options[i].value === prefs.selectedSource) {
+                        sourceSelect.value = prefs.selectedSource;
+                        break;
+                    }
+                }
+                updateChart();
+            }
+        } catch (e) {
+            handleSourceTypeChange();
+        }
+    }
+
+    // Attach save on any filter change
+    ['sourceType', 'selectedSource', 'selectedNutrient', 'dataType', 'expectedYield', 'viewMode'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('change', savePreferences);
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadPreferences();
+    });
+
+    // ── SERVICE WORKER REGISTRATION ───────────────────────────────────
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./service-worker.js').catch(function() {
+                // Service worker registration failed silently
+            });
+        });
+    }
 </script>
 </body>
 </html>

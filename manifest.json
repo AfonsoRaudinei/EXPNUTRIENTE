@@ -1,0 +1,19 @@
+{
+  "name": "Absorção de Nutrientes em Soja",
+  "short_name": "ExpNutriente",
+  "description": "Calculadora de absorção e exportação de nutrientes em soja por estádio fenológico",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0f2f0",
+  "theme_color": "#0d2818",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
