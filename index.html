@@ -9,26 +9,41 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
+        /* ── DESIGN SYSTEM: iOS + Samsung Blue ── */
         :root {
-            --bg: #f0f2f0;
-            --surface: #ffffff;
-            --surface-secondary: #e8ece8;
-            --green-dark: #0d2818;
-            --green-mid: #1a4a2e;
-            --green-accent: #3dd68c;
-            --green-neon: #4ADE80;
-            --green-light: #e8f5ec;
-            --green-pale: #f0f7f2;
-            --text-primary: #0d2818;
-            --text-secondary: #4a6357;
-            --text-muted: #8fa89a;
-            --border: #dce8e0;
+            /* Primárias */
+            --primary:        #007AFF;
+            --primary-dark:   #0051D5;
+            --primary-light:  #EAF2FF;
+            /* Neutras iOS */
+            --bg:             #F5F5F7;
+            --surface:        #FFFFFF;
+            --surface-alt:    #F5F5F7;
+            --border:         #E5E7EB;
+            --text-primary:   #1D1D1F;
+            --text-secondary: #6B7280;
+            --text-muted:     #9CA3AF;
+            /* Feedback */
+            --success:        #34C759;
+            --success-light:  #D1FAE5;
+            --error:          #FF3B30;
+            --warning:        #FFCC00;
+            /* Aliases legados (mantém compatibilidade JS) */
+            --green-dark:     #007AFF;
+            --green-mid:      #0051D5;
+            --green-accent:   #34C759;
+            --green-neon:     #007AFF;
+            --green-light:    #EAF2FF;
+            --green-pale:     #F5F5F7;
+            /* Radii */
             --radius-sm: 12px;
-            --radius-md: 16px;
-            --radius-lg: 20px;
-            --radius-xl: 28px;
-            --shadow: 0 1px 4px rgba(13,40,24,0.06), 0 4px 16px rgba(13,40,24,0.04);
-            --shadow-hover: 0 2px 8px rgba(13,40,24,0.08), 0 8px 24px rgba(13,40,24,0.06);
+            --radius-md: 14px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            /* Sombras */
+            --shadow:       0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-hover: 0 2px 8px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-blue:  0 4px 16px rgba(0,122,255,0.18);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,175 +51,169 @@
         body {
             min-height: 100vh;
             background-color: var(--bg);
-            padding: 2rem 1.5rem;
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 1.5rem 1.25rem;
+            font-family: -apple-system, 'SF Pro Display', 'DM Sans', BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
+            font-size: 16px;
         }
 
         .container { max-width: 1320px; margin: 0 auto; }
 
-        /* ── HEADER ────────────────────────────── */
+        /* ── HEADER ── */
         .header {
-            background: var(--green-dark);
+            background: linear-gradient(135deg, #007AFF 0%, #0051D5 100%);
             border-radius: var(--radius-xl);
-            padding: 2rem 2.5rem;
-            margin-bottom: 1.25rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1rem;
             display: grid;
-            grid-template-columns: 80px 1fr 80px;
+            grid-template-columns: 64px 1fr 64px;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-blue);
         }
 
         .logo-container, .qr-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
+            width: 52px;
+            height: 52px;
             border-radius: var(--radius-sm);
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
             overflow: hidden;
         }
 
-        .logo-container img,
-        .qr-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .logo-container img, .qr-container img {
+            width: 100%; height: 100%; object-fit: contain;
         }
 
-        .logo-placeholder {
-            font-size: 1.75rem;
-        }
+        .logo-placeholder { font-size: 1.5rem; }
 
         .title-section { text-align: center; }
 
         .author-name {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--green-accent);
-            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         h1 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
             color: #ffffff;
-            font-weight: 400;
+            font-weight: 700;
             line-height: 1.2;
-            letter-spacing: -0.01em;
-            margin-bottom: 0.4rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
         }
 
         .subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.45);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.55);
             font-weight: 400;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
         }
 
-        /* ── CARDS ─────────────────────────────── */
+        /* ── CARDS ── */
         .card {
             background: var(--surface);
             border-radius: var(--radius-lg);
-            padding: 1.75rem;
-            margin-bottom: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
         }
 
         .section-label {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         h2 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-primary);
-            font-weight: 400;
-            margin-bottom: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
 
-        /* ── FILTERS ───────────────────────────── */
+        /* ── FILTERS ── */
         .filters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
         }
-
-        .filter-group { }
 
         label {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
         }
 
         select, input[type="number"] {
             width: 100%;
-            padding: 0.65rem 0.9rem;
-            background: var(--green-pale);
-            border: 1.5px solid transparent;
+            padding: 0.6rem 0.85rem;
+            background: var(--surface-alt);
+            border: 1.5px solid var(--border);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
-            font-size: 0.9rem;
-            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            font-family: inherit;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.18s ease;
+            transition: all 0.15s ease;
             appearance: none;
             -webkit-appearance: none;
         }
 
         select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa89a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239CA3AF' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
             padding-right: 2.25rem;
         }
 
         select:hover, input[type="number"]:hover {
-            border-color: var(--green-accent);
-            background-color: var(--green-light);
+            border-color: var(--primary);
+            background-color: var(--primary-light);
         }
 
         select:focus, input[type="number"]:focus {
             outline: none;
-            border-color: var(--green-neon);
-            background-color: var(--green-light);
-            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15);
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.12);
         }
 
         option { background: #ffffff; color: var(--text-primary); }
         optgroup { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; }
 
-        /* ── STATS GRID ────────────────────────── */
+        /* ── STATS GRID ── */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .stat-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 1.25rem 1.5rem;
-            transition: box-shadow 0.18s ease, transform 0.18s ease;
+            padding: 1rem 1.25rem;
+            transition: box-shadow 0.15s ease, transform 0.15s ease;
             box-shadow: var(--shadow);
         }
 
@@ -214,86 +223,82 @@
         }
 
         .stat-value {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 1.9rem;
-            font-weight: 400;
+            font-size: 1.7rem;
+            font-weight: 700;
             color: var(--text-primary);
             line-height: 1;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
         }
 
         .stat-label {
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             color: var(--text-muted);
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.06em;
         }
 
-        /* ── LEGEND ────────────────────────────── */
+        /* ── LEGEND ── */
         .legend {
             display: flex;
-            gap: 1.75rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            padding: 1rem 1.5rem;
+            padding: 0.85rem 1.25rem;
         }
 
-        .legend-item { display: flex; align-items: center; gap: 0.5rem; }
+        .legend-item { display: flex; align-items: center; gap: 0.45rem; }
 
-        .legend-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
+        .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
         .legend-text {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-secondary);
             font-weight: 400;
         }
 
-        /* ── CHART ─────────────────────────────── */
+        /* ── CHART ── */
         .chart-container {
             position: relative;
-            height: 360px;
-            margin-bottom: 1.25rem;
+            height: 340px;
+            margin-bottom: 1rem;
         }
 
-        /* ── INFO BOX ──────────────────────────── */
+        /* ── INFO BOX ── */
         .info-box {
-            margin-top: 1rem;
-            padding: 1rem 1.25rem;
+            margin-top: 0.85rem;
+            padding: 0.85rem 1rem;
             border-radius: var(--radius-sm);
             display: flex;
             align-items: start;
-            gap: 0.75rem;
+            gap: 0.65rem;
         }
 
-        .info-icon { font-size: 1rem; margin-top: 1px; }
+        .info-icon { font-size: 0.95rem; margin-top: 1px; }
 
         .info-title {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .info-text {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
-        /* ── TABLE ─────────────────────────────── */
-        table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        /* ── TABLE ── */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
 
         thead tr { border-bottom: 1.5px solid var(--border); }
 
         th {
-            padding: 0.75rem 1rem;
+            padding: 0.65rem 0.9rem;
             text-align: left;
-            font-size: 0.7rem;
+            font-size: 0.66rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -304,66 +309,96 @@
 
         tbody tr {
             border-bottom: 1px solid var(--border);
-            transition: background 0.15s;
+            transition: background 0.12s;
         }
 
         tbody tr:last-child { border-bottom: none; }
-        tbody tr:hover { background: var(--green-pale); }
+        tbody tr:hover { background: var(--primary-light); }
 
-        td { padding: 0.8rem 1rem; color: var(--text-primary); font-weight: 400; }
+        td { padding: 0.7rem 0.9rem; color: var(--text-primary); font-weight: 400; }
         td.right { text-align: right; }
 
-        /* ── INDICES GRID ──────────────────────── */
+        /* ── INDICES GRID ── */
         .indices-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 0.75rem;
-            margin-top: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.6rem;
+            margin-top: 1rem;
         }
 
         .index-card {
-            padding: 0.75rem 1rem;
-            background: var(--green-pale);
+            padding: 0.6rem 0.85rem;
+            background: var(--primary-light);
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(0,122,255,0.12);
         }
 
         .index-label {
-            font-size: 0.7rem;
+            font-size: 0.66rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .index-value {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--green-mid);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
         }
 
-        /* ── FOOTER ────────────────────────────── */
+        /* ── FOOTER ── */
         footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1.25rem;
             color: var(--text-muted);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 400;
         }
 
-        /* ── RESPONSIVE ────────────────────────── */
+        /* ── BOTÃO JORNADA PROFISSIONAL ── */
+        .profile-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: background 0.15s ease, transform 0.15s ease;
+            cursor: pointer;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-1px);
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            body { padding: 1rem; }
+            body { padding: 0.75rem; }
             .header {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 1rem;
-                padding: 1.5rem;
+                gap: 0.75rem;
+                padding: 1.25rem;
             }
-            .logo-container, .qr-container { display: none; }
-            h1 { font-size: 1.3rem; }
-            .filters-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+            .logo-container, .qr-container, .profile-btn { display: none; }
+            h1 { font-size: 1.2rem; }
+            .filters-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
         }
 
         @media (max-width: 500px) {
@@ -384,9 +419,13 @@
             <h1>Absorção de Nutrientes em Soja</h1>
             <p class="subtitle">Análise por Estádio Fenológico · Extração vs Exportação</p>
         </div>
-        <div class="qr-container">
-            <img src="qrcode.png" alt="QR Code" onerror="this.parentElement.style.display='none'">
-        </div>
+        <a href="https://afonsoraudinei.github.io/Jornadaprofissional/" target="_blank" rel="noopener" class="profile-btn" title="Jornada Profissional">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Jornada</span>
+        </a>
     </header>
 
     <!-- FILTROS -->
@@ -397,7 +436,7 @@
                 <label for="sourceType">Tipo de Fonte</label>
                 <select id="sourceType" onchange="handleSourceTypeChange()">
                     <option value="Autores">Autores</option>
-                    <option value="Guidorizzi">Guidorizzi</option>
+                    <option value="Guidorizzi">Guidorizzi - Tecnologia</option>
                     <option value="Cultivar">Cultivar</option>
                 </select>
             </div>
@@ -456,11 +495,11 @@
     <!-- LEGENDA -->
     <div class="card legend">
         <div class="legend-item">
-            <div class="legend-dot" style="background: var(--green-dark);"></div>
+            <div class="legend-dot" style="background: #007AFF;"></div>
             <span class="legend-text">Dados Originais (Literatura)</span>
         </div>
         <div class="legend-item">
-            <div class="legend-dot" style="background: var(--green-accent);"></div>
+            <div class="legend-dot" style="background: #34C759;"></div>
             <span class="legend-text">Dados Calculados (Índices de Exportação)</span>
         </div>
     </div>
@@ -479,7 +518,7 @@
     <div class="card">
         <h2>Sobre os Dados Calculados</h2>
         <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.65; margin-bottom: 0.5rem;">
-            Alguns valores foram calculados utilizando <strong style="color: var(--green-mid);">índices de exportação</strong>
+            Alguns valores foram calculados utilizando <strong style="color: var(--primary);">índices de exportação</strong>
             quando dados originais não estavam disponíveis na literatura (Embrapa e literatura científica):
         </p>
         <div class="indices-grid">
@@ -507,6 +546,14 @@
 
     <footer>
         <p>Absorção de nutrientes em soja &nbsp;·&nbsp; <span id="footerInfo"></span></p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://afonsoraudinei.github.io/Jornadaprofissional/"
+               target="_blank" rel="noopener"
+               style="color: var(--primary); text-decoration: none; font-weight: 500; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Raudinei Afonso · Jornada Profissional
+            </a>
+        </p>
     </footer>
 
 </div>
@@ -580,11 +627,11 @@
   "Guidorizzi": {
     "Enlist": {
       "Exportação": { N: 53.9, P: 9.3,  K: 19.1, Ca: 2.2, Mg: 2.5, S: 6.7,  Cu: 10.9, Fe: 122.3, Zn: 46.5, Mn: 14.1, B: 37.3, Se: 1.3, Co: 0.2, Mo: 3.2, Ni: 0.4 },
-      "Extração":  { N: 142.9,P: 31.9, K: 120.8,Ca: 35.8,Mg: 13.6,S: 17.9, Cu: 37.5, Fe: 726.3, Zn: 159.7,Mn: 195.4,B: 163.9,Se: 1.5, Co: 0.4, Mo: 12.4,Ni: 1.9 }
+      "Extração":  { N: 179.9,P: 36.4, K: 127.6,Ca: 61.1,Mg: 18.9,S: 27.3, Cu: 42.6, Fe: 1106.9,Zn: 178.5,Mn: 309.9,B: 179.8,Se: 1.6, Co: 0.5, Mo: 9.2, Ni: 2.5 }
     },
     "Xtend": {
       "Exportação": { N: 55.1, P: 10.9, K: 19.6, Ca: 2.3, Mg: 2.5, S: 8.6,  Cu: 12.7, Fe: 246.7, Zn: 44.8, Mn: 14.3, B: 38.7, Se: 1.1, Co: 0.2, Mo: 3.8, Ni: 0.5 },
-      "Extração":  { N: 179.9,P: 36.4, K: 127.6,Ca: 61.1,Mg: 18.9,S: 27.3, Cu: 42.6, Fe: 1106.9,Zn: 178.5,Mn: 309.9,B: 179.8,Se: 1.6, Co: 0.5, Mo: 9.2, Ni: 2.5 }
+      "Extração":  { N: 142.9,P: 31.9, K: 120.8,Ca: 35.8,Mg: 13.6,S: 17.9, Cu: 37.5, Fe: 726.3, Zn: 159.7,Mn: 195.4,B: 163.9,Se: 1.5, Co: 0.4, Mo: 12.4,Ni: 1.9 }
     },
     "Roundup Ready": {
       "Exportação": { N: 55.6, P: 9.3,  K: 20.6, Ca: 2.1, Mg: 2.6, S: 8.3,  Cu: 11.0, Fe: 123.1, Zn: 43.8, Mn: 15.7, B: 34.6, Se: 1.7, Co: 0.2, Mo: 3.3, Ni: 0.6 },
@@ -661,7 +708,9 @@
         const sourceType = document.getElementById('sourceType').value;
         const sourceSelect = document.getElementById('selectedSource');
         const sourceLabel = document.getElementById('sourceLabel');
-        sourceLabel.textContent = sourceType === 'Autores' ? 'Autor' : sourceType === 'Guidorizzi' ? 'Tecnologia' : 'Cultivar';
+        if (sourceType === 'Autores') sourceLabel.textContent = 'Autor';
+        else if (sourceType === 'Guidorizzi') sourceLabel.textContent = 'Tecnologia';
+        else sourceLabel.textContent = 'Cultivar';
         sourceSelect.innerHTML = '';
         const sources = Object.keys(nutrientData[sourceType] || {});
         sources.forEach(source => {
@@ -675,13 +724,13 @@
 
     function getDataQuality(sourceType, selectedSource, nutrient, dataType) {
         if (!selectedSource || !nutrientData[sourceType]?.[selectedSource]?.[dataType]) {
-            return { type: 'original', label: 'Dado Original (Literatura)', color: '#0d2818' };
+            return { type: 'original', label: 'Dado Original (Literatura)', color: '#007AFF' };
         }
         const value = nutrientData[sourceType][selectedSource][dataType][nutrient];
         if (value === 0) {
-            return { type: 'calculated', label: 'Dado Calculado (Índices)', color: '#3dd68c' };
+            return { type: 'calculated', label: 'Dado Calculado (Índices)', color: '#34C759' };
         }
-        return { type: 'original', label: 'Dado Original (Literatura)', color: '#0d2818' };
+        return { type: 'original', label: 'Dado Original (Literatura)', color: '#007AFF' };
     }
 
     function updateChart() {
@@ -730,13 +779,13 @@
         const maxValue = Math.max(...chartData.map(d => d.value));
         const yMax = Math.ceil(maxValue * 1.1);
 
-        const gradMain = ctx.createLinearGradient(0, 0, 0, 360);
-        gradMain.addColorStop(0, 'rgba(13, 40, 24, 0.18)');
-        gradMain.addColorStop(1, 'rgba(13, 40, 24, 0.02)');
+        const gradMain = ctx.createLinearGradient(0, 0, 0, 340);
+        gradMain.addColorStop(0, 'rgba(0, 122, 255, 0.18)');
+        gradMain.addColorStop(1, 'rgba(0, 122, 255, 0.02)');
 
-        const gradPct = ctx.createLinearGradient(0, 0, 0, 360);
-        gradPct.addColorStop(0, 'rgba(61, 214, 140, 0.2)');
-        gradPct.addColorStop(1, 'rgba(61, 214, 140, 0.02)');
+        const gradPct = ctx.createLinearGradient(0, 0, 0, 340);
+        gradPct.addColorStop(0, 'rgba(52, 199, 89, 0.2)');
+        gradPct.addColorStop(1, 'rgba(52, 199, 89, 0.02)');
 
         const labelPrefix = viewMode === 'accumulated' ? 'Acumulado' : 'Neste Estádio';
         const percentLabel = viewMode === 'accumulated' ? '% Acumulada' : '% Neste Estádio';
@@ -749,11 +798,11 @@
                     {
                         label: `${labelPrefix} (${unit})`,
                         data: chartData.map(d => d.value),
-                        borderColor: '#0d2818',
+                        borderColor: '#007AFF',
                         backgroundColor: gradMain,
                         borderWidth: 2,
                         pointRadius: 5,
-                        pointBackgroundColor: '#0d2818',
+                        pointBackgroundColor: '#007AFF',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 2,
                         tension: 0.4,
@@ -763,12 +812,12 @@
                     {
                         label: percentLabel,
                         data: chartData.map(d => d.percentage),
-                        borderColor: '#3dd68c',
+                        borderColor: '#34C759',
                         backgroundColor: gradPct,
                         borderWidth: 2,
                         borderDash: [4, 4],
                         pointRadius: 4,
-                        pointBackgroundColor: '#3dd68c',
+                        pointBackgroundColor: '#34C759',
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 2,
                         tension: 0.4,
@@ -784,8 +833,8 @@
                 plugins: {
                     legend: {
                         labels: {
-                            color: '#4a6357',
-                            font: { family: "'DM Sans', sans-serif", size: 12, weight: '500' },
+                            color: '#6B7280',
+                            font: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 12, weight: '500' },
                             padding: 16,
                             usePointStyle: true,
                             pointStyle: 'circle'
@@ -793,13 +842,13 @@
                     },
                     tooltip: {
                         backgroundColor: '#ffffff',
-                        titleColor: '#0d2818',
-                        bodyColor: '#4a6357',
-                        borderColor: '#dce8e0',
+                        titleColor: '#1D1D1F',
+                        bodyColor: '#6B7280',
+                        borderColor: '#E5E7EB',
                         borderWidth: 1,
                         padding: 12,
-                        bodyFont: { family: "'DM Sans', sans-serif", size: 13 },
-                        titleFont: { family: "'DM Sans', sans-serif", size: 13, weight: '600' },
+                        bodyFont: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 13 },
+                        titleFont: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 13, weight: '600' },
                         cornerRadius: 10,
                         displayColors: true,
                         callbacks: {
@@ -816,19 +865,19 @@
                 scales: {
                     y: {
                         type: 'linear', position: 'left', min: 0, max: yMax,
-                        ticks: { color: '#4a6357', font: { family: "'DM Sans', sans-serif", size: 11 } },
-                        grid: { color: 'rgba(220,232,224,0.6)', drawBorder: false },
-                        title: { display: true, text: labelPrefix + ` (${unit})`, color: '#0d2818', font: { family: "'DM Sans', sans-serif", size: 11, weight: '600' } }
+                        ticks: { color: '#6B7280', font: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 11 } },
+                        grid: { color: 'rgba(229,231,235,0.8)', drawBorder: false },
+                        title: { display: true, text: labelPrefix + ` (${unit})`, color: '#007AFF', font: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 11, weight: '600' } }
                     },
                     y1: {
                         type: 'linear', position: 'right', min: 0, max: 100,
-                        ticks: { color: '#3dd68c', font: { family: "'DM Sans', sans-serif", size: 11 } },
+                        ticks: { color: '#34C759', font: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 11 } },
                         grid: { drawOnChartArea: false, drawBorder: false },
-                        title: { display: true, text: percentLabel, color: '#3dd68c', font: { family: "'DM Sans', sans-serif", size: 11, weight: '600' } }
+                        title: { display: true, text: percentLabel, color: '#34C759', font: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 11, weight: '600' } }
                     },
                     x: {
-                        ticks: { color: '#8fa89a', font: { family: "'DM Sans', sans-serif", size: 11 } },
-                        grid: { color: 'rgba(220,232,224,0.4)', drawBorder: false }
+                        ticks: { color: '#9CA3AF', font: { family: "-apple-system, 'SF Pro Display', sans-serif", size: 11 } },
+                        grid: { color: 'rgba(229,231,235,0.5)', drawBorder: false }
                     }
                 }
             }
@@ -843,24 +892,24 @@
         const statsGrid = document.getElementById('statsGrid');
         const isOriginal = dataQuality.type === 'original';
         statsGrid.innerHTML = `
-            <div class="stat-card" style="border-top: 3px solid #0d2818;">
-                <div class="stat-value" style="color:#0d2818;">${total.toFixed(2)}</div>
+            <div class="stat-card" style="border-top: 3px solid #007AFF;">
+                <div class="stat-value" style="color:#007AFF;">${total.toFixed(2)}</div>
                 <div class="stat-label">Total ${unit}</div>
             </div>
-            <div class="stat-card" style="border-top: 3px solid #3dd68c;">
-                <div class="stat-value" style="color:#1a4a2e;">${yield_.toFixed(1)}</div>
+            <div class="stat-card" style="border-top: 3px solid #34C759;">
+                <div class="stat-value" style="color:#1D1D1F;">${yield_.toFixed(1)}</div>
                 <div class="stat-label">Toneladas</div>
             </div>
-            <div class="stat-card" style="border-top: 3px solid #8fa89a;">
-                <div class="stat-value" style="color:#0d2818; font-size:1.5rem;">${nutrient}</div>
+            <div class="stat-card" style="border-top: 3px solid #9CA3AF;">
+                <div class="stat-value" style="color:#1D1D1F; font-size:1.5rem;">${nutrient}</div>
                 <div class="stat-label">Nutriente</div>
             </div>
             <div class="stat-card" style="border-top: 3px solid ${dataQuality.color};">
                 <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem;">
                     <div style="width:8px;height:8px;border-radius:50%;background:${dataQuality.color};"></div>
-                    <span style="font-size:0.75rem;font-weight:600;color:${dataQuality.color};text-transform:uppercase;letter-spacing:0.06em;">${isOriginal ? 'Original' : 'Calculado'}</span>
+                    <span style="font-size:0.68rem;font-weight:600;color:${dataQuality.color};text-transform:uppercase;letter-spacing:0.06em;">${isOriginal ? 'Original' : 'Calculado'}</span>
                 </div>
-                <div style="font-size:0.78rem;color:#4a6357;line-height:1.4;">${dataQuality.label}</div>
+                <div style="font-size:0.75rem;color:#6B7280;line-height:1.4;">${dataQuality.label}</div>
             </div>
         `;
     }
@@ -870,33 +919,33 @@
         const viewMode = document.getElementById('viewMode').value;
         let html = '';
         if (dataQuality.type === 'calculated') {
-            html += `<div class="info-box" style="background:#f0f7f2;border:1px solid #dce8e0;">
-                <div class="info-icon" style="color:#3dd68c;">ℹ</div>
+            html += `<div class="info-box" style="background:#EAF2FF;border:1px solid rgba(0,122,255,0.15);">
+                <div class="info-icon" style="color:#007AFF;">ℹ</div>
                 <div class="info-content">
-                    <div class="info-title" style="color:#1a4a2e;">Dado Calculado</div>
+                    <div class="info-title" style="color:#0051D5;">Dado Calculado</div>
                     <div class="info-text">Este valor foi calculado utilizando índices de exportação baseados em literatura científica.</div>
                 </div>
             </div>`;
         }
         if (viewMode === 'accumulated') {
-            html += `<div class="info-box" style="background:#f0f7f2;border:1px solid #dce8e0;">
-                <div class="info-icon" style="color:#0d2818;">◈</div>
+            html += `<div class="info-box" style="background:#F5F5F7;border:1px solid #E5E7EB;">
+                <div class="info-icon" style="color:#007AFF;">◈</div>
                 <div class="info-content">
-                    <div class="info-title" style="color:#0d2818;">Curva Acumulada</div>
+                    <div class="info-title" style="color:#1D1D1F;">Curva Acumulada</div>
                     <div class="info-text">
-                        <strong style="color:#0d2818;">Eixo esq.:</strong> Total absorvido desde V1 até cada estádio em ${unit}<br>
-                        <strong style="color:#3dd68c;">Eixo dir.:</strong> Porcentagem total absorvida acumulada
+                        <strong style="color:#007AFF;">Eixo esq.:</strong> Total absorvido desde V1 até cada estádio em ${unit}<br>
+                        <strong style="color:#34C759;">Eixo dir.:</strong> Porcentagem total absorvida acumulada
                     </div>
                 </div>
             </div>`;
         } else {
-            html += `<div class="info-box" style="background:#f0f7f2;border:1px solid #dce8e0;">
-                <div class="info-icon" style="color:#0d2818;">◈</div>
+            html += `<div class="info-box" style="background:#F5F5F7;border:1px solid #E5E7EB;">
+                <div class="info-icon" style="color:#007AFF;">◈</div>
                 <div class="info-content">
-                    <div class="info-title" style="color:#0d2818;">Absorção Por Estádio</div>
+                    <div class="info-title" style="color:#1D1D1F;">Absorção Por Estádio</div>
                     <div class="info-text">
-                        <strong style="color:#0d2818;">Eixo esq.:</strong> Quantidade absorvida especificamente naquele estádio em ${unit}<br>
-                        <strong style="color:#3dd68c;">Eixo dir.:</strong> Porcentagem absorvida naquele estádio individual
+                        <strong style="color:#007AFF;">Eixo esq.:</strong> Quantidade absorvida especificamente naquele estádio em ${unit}<br>
+                        <strong style="color:#34C759;">Eixo dir.:</strong> Porcentagem absorvida naquele estádio individual
                     </div>
                 </div>
             </div>`;
@@ -923,8 +972,8 @@
                     ${chartData.map((row, idx) => `
                         <tr>
                             <td style="font-weight:500;">${stages[idx]}</td>
-                            <td class="right" style="color:#3dd68c;font-weight:500;">${row.percentage.toFixed(1)}%</td>
-                            <td class="right" style="color:#0d2818;font-weight:500;">${row.value.toFixed(2)}</td>
+                            <td class="right" style="color:#34C759;font-weight:600;">${row.percentage.toFixed(1)}%</td>
+                            <td class="right" style="color:#007AFF;font-weight:600;">${row.value.toFixed(2)}</td>
                         </tr>
                     `).join('')}
                 </tbody>
